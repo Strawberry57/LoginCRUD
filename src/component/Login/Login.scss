@@ -1,0 +1,132 @@
+.background_login {
+  background-image: linear-gradient(to bottom right, #57d0fd, #a5f3e8);
+  height: 100vh;
+  position: relative;
+  form#basic {
+    background-color: #ffffff;
+    width: 700px;
+    height: 500px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 5px;
+    .login_form {
+      width: 111%;
+      position: absolute;
+      left: 58%;
+      top: 45%;
+      transform: translate(-50%, -50%);
+      h1 {
+        color: #4e8df4;
+        margin-top: 30px;
+        margin-left: 70px;
+        font-weight: 700;
+      }
+      .ant-form-item-label
+        > label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
+        content: "" !important;
+      }
+
+      label.ant-form-item-required {
+        font-size: 15px;
+        margin-top: 20px;
+        font-weight: 600;
+        color: #b8b8b8;
+        letter-spacing: 2px;
+      }
+
+      .ant-row.ant-form-item {
+        flex-direction: column;
+        .ant-col.ant-col-8.ant-form-item-label {
+          flex: 0 0 20% !important;
+          text-align: initial;
+          margin-left: 70px;
+          justify-content: center;
+          .ant-form-item-label
+            > label.ant-form-item-required:not(.ant-form-item-required-mark-optional) {
+            ::before {
+              content: " ";
+            }
+          }
+        }
+      }
+      .ant-col.ant-col-16.ant-form-item-control {
+        margin-left: 70px;
+      }
+
+      input#basic_username {
+        height: 50px;
+        background-color: #e5e5e5;
+        border-radius: 5px;
+        font-size: 20px;
+      }
+      input#basic_password {
+        height: 40px;
+        background-color: #e5e5e5;
+        font-size: 20px;
+        svg {
+          height: 23px;
+        }
+      }
+      button.ant-btn.ant-btn-primary {
+        width: 100%;
+        height: 50px;
+        span {
+          font-size: 20px;
+          font-weight: 700;
+        }
+      }
+      label.ant-checkbox-wrapper {
+        span {
+          font-size: 15px;
+          font-weight: 500;
+          color: #b8b8b8;
+        }
+      }
+      span.ant-input-affix-wrapper.ant-input-password {
+        background-color: #e5e5e5;
+        border-radius: 5px;
+        span {
+          span {
+            svg {
+              width: 23px;
+              height: 30px;
+            }
+          }
+        }
+      }
+
+      button.ant-btn.ant-btn-primary {
+        border-radius: 5px;
+      }
+      .ant-form-item-control-input-content {
+        display: flex;
+        justify-content: space-between;
+        a {
+          font-size: 15px;
+          font-weight: 600;
+        }
+      }
+      .error {
+        display: none;
+        &.error_login {
+          color: red;
+          position: absolute;
+          bottom: 2px;
+          left: 72px;
+          display: block;
+        }
+      }
+
+      .Create_account {
+        position: absolute;
+        left: 37%;
+        a {
+          font: size 10px;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}
