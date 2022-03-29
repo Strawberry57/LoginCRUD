@@ -5,11 +5,16 @@ import "./index.css";
 import App from "./App";
 import "antd/dist/antd.css";
 import reportWebVitals from "./reportWebVitals";
-
+import { createStore } from "redux";
+import LoginApp from "./reducers/index";
+import { Provider } from "react-redux";
+const store = createStore(LoginApp);
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
