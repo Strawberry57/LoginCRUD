@@ -1,0 +1,132 @@
+form#register {
+  background-color: #ffffff;
+  width: 1100px;
+  height: 800px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 30px;
+  .create_form {
+    width: 100%;
+    position: absolute;
+    left: 40%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    .create_title {
+      h1 {
+        color: #4e8df4;
+        margin-top: 25px;
+        margin-left: 20%;
+        font-weight: 700;
+        margin-bottom: 30px;
+      }
+    }
+    label.ant-form-item-required {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      position: absolute;
+      left: 221px;
+      font-size: 15px;
+      font-weight: 500;
+    }
+    .ant-form-item-label
+      > label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
+      content: "" !important;
+    }
+    .ant-form-item-label > label::after {
+      content: " ";
+    }
+    span.ant-input-group-addon {
+      border-radius: 10px;
+    }
+    input#register_email {
+      height: 40px;
+      border-radius: 10px;
+      font-size: 17px;
+      border: 2px solid black;
+    }
+    span.ant-input-affix-wrapper.ant-input-password.ant-input-affix-wrapper-has-feedback {
+      height: 40px;
+      border-radius: 10px;
+      border: 2px solid black;
+      input#register_password {
+        font-size: 17px;
+      }
+    }
+    input#register_usename {
+      height: 40px;
+      border-radius: 10px;
+      font-size: 17px;
+      border: 2px solid black;
+      &.error {
+        border: 2px solid red;
+      }
+    }
+    .ant-select-selector {
+      height: 40px;
+      border-radius: 10px;
+      font-size: 17px;
+      border: 2px solid black;
+    }
+    .input#register_phone {
+      height: 40px;
+      border-radius: 10px;
+      font-size: 17px;
+      border: 2px solid black;
+    }
+    input#register_captcha {
+      height: 40px;
+      border-radius: 10px;
+      font-size: 17px;
+      border: 2px solid black;
+    }
+    button.ant-btn.ant-btn-default {
+      height: 40px;
+      border-radius: 10px;
+      font-size: 17px;
+      border: 2px solid black;
+    }
+    input#register_phone {
+      height: 40px;
+      border-radius: 10px;
+      font-size: 17px;
+      border: 2px solid black;
+    }
+    input#register_confirm {
+      font-size: 17px;
+    }
+    label {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      position: absolute;
+      left: 221px;
+      font-size: 15px;
+      font-weight: 500;
+    }
+    .ant-form-item-extra {
+      font-size: 15px;
+      font-weight: 500;
+    }
+    button.ant-btn.ant-btn-primary {
+      height: 50px;
+      width: 25%;
+      font-size: 20px;
+    }
+    span.ant-select-selection-item {
+      padding-right: 10px;
+    }
+    .username_taken {
+      display: none;
+      &.error_username {
+        color: red;
+        position: absolute;
+        display: block;
+        left: 370px;
+        top: 330px;
+      }
+    }
+  }
+}
