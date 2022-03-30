@@ -1,37 +1,25 @@
-import { CREATE_USER, LOGIN_AUTH, UPDATE_USER } from "../actions/index";
-import { combineReducers } from "redux";
+import { createSlice } from "@reduxjs/toolkit";
 
-const initialValues = {
-  user: {},
-};
-
-const loginAuth = (state = initialValues, action) => {
-  switch (action.type) {
-    case LOGIN_AUTH:
-      return {
-        ...state,
-        user: action.payload,
-      };
-    case CREATE_USER:
-      return {
-        ...state,
-        user: action.payload,
-      };
-    case UPDATE_USER:
-      return { ...state, user: action.payload };
-    default:
-      return state;
-  }
-};
-const extra = (state = { value: "this_is_extra_reducer" }, action) => {
-  switch (action.type) {
-    default:
-      return state;
-  }
-};
-const loginApp = combineReducers({
-  loginAuth,
-  extra,
+const userSlice = createSlice({
+  name: "user",
+  initialState: {
+    user: {},
+  },
+  reducers: {
+    LOGIN_AUTH: (state, action) => {
+      state.user = action.payload;
+    },
+    CREATE_USER: (state, action) => {
+      state.user = action.payload;
+    },
+    UPDATE_USER: (state, action) => {
+      state.user = action.payload;
+    },
+  },
 });
 
-export default loginApp;
+export const { LOGIN_AUTH, CREATE_USER, UPDATE_USER } = userSlice.actions;
+
+export const selectUser = (state) => state.user.user;
+
+export default userSlice.reducer;

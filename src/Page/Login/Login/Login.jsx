@@ -1,11 +1,10 @@
 import React from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Form, Input, Button, Checkbox } from "antd";
-import axios from "axios";
-
+import { LOGIN_AUTH } from "../../../reducers/index";
 import "./Login.scss";
 import { useDispatch } from "react-redux";
-import { loginAuth } from "../../../actions/index";
+import { getUsers } from "../../../sever/apis";
 const $ = document.querySelector.bind(document);
 function Login() {
   const dispatch = useDispatch();
@@ -13,8 +12,7 @@ function Login() {
   const onFinish = (values) => {
     console.log("Success:", values);
     const errorLogin = $(".error");
-    axios
-      .get("https://62396f2d043817a543e26d2a.mockapi.io/login/account")
+    getUsers()
       .then((response) => response.data)
       .then((data) => {
         return data.find(
@@ -28,7 +26,7 @@ function Login() {
         errorLogin.classList.toggle("error_login", !user);
         if (user) {
           dispatch(
-            loginAuth({
+            LOGIN_AUTH({
               name: values.username,
               password: values.password,
             })

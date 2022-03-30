@@ -1,5 +1,6 @@
 import React from "react";
 import { CloseOutlined } from "@ant-design/icons";
+import { CREATE_USER } from "../../../reducers/index";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "./NewAccount.scss";
@@ -13,8 +14,8 @@ import {
   Checkbox,
   Button,
 } from "antd";
-import { createUser } from "../../../actions/index";
 import { useDispatch } from "react-redux";
+import { getUsers, createUser } from "../../../sever/apis";
 const residences = [
   {
     value: "zhejiang",
@@ -107,8 +108,7 @@ function NewAccount() {
     const error_username = $(".username_taken");
     const input = $("input#register_usename");
     console.log(value.target.value);
-    axios
-      .get("https://62396f2d043817a543e26d2a.mockapi.io/login/account")
+    getUsers()
       .then((response) => response.data)
       .then((data) => {
         return data.some((user) => user.usename === value.target.value);
@@ -133,28 +133,26 @@ function NewAccount() {
 
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
-    axios
-      .get("https://62396f2d043817a543e26d2a.mockapi.io/login/account")
+    getUsers()
       .then((response) => response.data)
       .then((data) => {
         return data.find((user) => user.usename === values.username);
       })
       .then((user) => {
         if (!user) {
-          axios
-            .post("https://62396f2d043817a543e26d2a.mockapi.io/login/account", {
-              usename: values.usename,
-              password: values.password,
-              email: values.email,
-              residence: values.residence,
-              phone: values.phone,
-              gender: values.gender,
-            })
+          createUser({
+            usename: values.usename,
+            password: values.password,
+            email: values.email,
+            residence: values.residence,
+            phone: values.phone,
+            gender: values.gender,
+          })
             .then(function (account) {
               console.log("upadte", account);
               if (account.data) {
                 dispatch(
-                  createUser({
+                  CREATE_USER({
                     name: account.data.name,
                     password: account.data.password,
                     email: account.data.email,

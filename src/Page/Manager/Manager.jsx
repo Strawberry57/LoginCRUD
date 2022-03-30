@@ -4,10 +4,11 @@ import { Table, Input, InputNumber, Popconfirm, Form, Typography } from "antd";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { LogoutOutlined } from "@ant-design/icons";
 import Login from "../Login/Login/Login";
-import axios from "axios";
 import { useSelector } from "react-redux";
-import { createUser, updateUser } from "../../actions/index";
 import { useDispatch } from "react-redux";
+import { CREATE_USER, selectUser, UPDATE_USER } from "../../reducers/index";
+import { deleteUser, getUsers, updateUser, createUser } from "../../sever/apis";
+
 const originalData = [];
 const EditableCell = ({
   editing,
@@ -45,8 +46,8 @@ const EditableCell = ({
 };
 function Manager() {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.loginAuth.user);
 
+  const user = useSelector(selectUser);
   const [form] = Form.useForm();
   const [data, setData] = useState([]);
   const [editingKey, setEditingKey] = useState("");
@@ -57,8 +58,7 @@ function Manager() {
   const inputRef = useRef();
 
   useEffect(() => {
-    axios
-      .get("https://62396f2d043817a543e26d2a.mockapi.io/login/account")
+    getUsers()
       .then(function (account) {
         const data = account.data;
         data.map((e) => {
@@ -99,10 +99,7 @@ function Manager() {
     try {
       const newData = [...data];
       const index = newData.findIndex((item) => key === item.key);
-      axios
-        .delete(
-          `https://62396f2d043817a543e26d2a.mockapi.io/login/account/${key}`
-        )
+      deleteUser(key)
         .then((response) => {
           console.log(response);
         })
@@ -129,19 +126,15 @@ function Manager() {
         const item = newData[index];
         const check = newData.splice(index, 1, { ...item, ...row });
         setData(newData);
-        axios
-          .put(
-            `https://62396f2d043817a543e26d2a.mockapi.io/login/account/${key}`,
-            {
-              usename: newData[index].name,
-              phone: newData[index].phone,
-              email: newData[index].address,
-            }
-          )
+        updateUser(key, {
+          usename: newData[index].name,
+          phone: newData[index].phone,
+          email: newData[index].address,
+        })
           .then((response) => response.data)
           .then((data) => {
             dispatch(
-              updateUser({
+              UPDATE_USER({
                 name: data.usename,
                 email: data.email,
                 phone: data.phone,
@@ -256,18 +249,17 @@ function Manager() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios
-      .post("https://62396f2d043817a543e26d2a.mockapi.io/login/account", {
-        usename: name,
-        email: address,
-        phone: phone,
-        age: age,
-      })
+    createUser({
+      usename: name,
+      email: address,
+      phone: phone,
+      age: age,
+    })
       .then(function (account) {
         console.log("upadte", account);
         if (account.data) {
           dispatch(
-            createUser({
+            CREATE_USER({
               name: account.data.name,
               email: account.data.address,
               phone: account.data.phone,
